@@ -1,0 +1,168 @@
+
+
+//Day 3
+
+
+
+Console.WriteLine("---------------------conditional statements-----------------------------------");
+
+String hobby = "learning";
+
+if (hobby == "learning")
+{
+    Console.WriteLine("she is learning");
+}
+else
+{
+
+    Console.WriteLine("No Learning");
+}
+
+Console.WriteLine("---------------------if, else if statements-----------------------------------");
+
+int mark = 66;
+
+if (mark >= 90)
+{
+    Console.WriteLine(" O GRADE");
+}
+
+else if(mark >= 80)
+{
+    Console.WriteLine(" A GRADE");
+}
+
+else if (mark >= 70)
+{
+    Console.WriteLine(" B GRADE");
+}
+
+else if (mark >= 50)
+{
+    Console.WriteLine(" C GRADE");
+}
+else 
+{
+    Console.WriteLine(" FAIL");
+}
+
+
+Console.WriteLine("---------------------Nested if statements-----------------------------------");
+
+int cost = 100;
+
+if (cost == 100)
+{
+    if (cost < 50)
+        Console.WriteLine(" price is lesser");
+    else
+        Console.WriteLine("price is higher ");
+}
+
+int day = 6;
+
+// Using Switch case 
+switch (day)
+{
+    case 1:
+        Console.WriteLine(" MON");
+        break;
+    case 2:
+        Console.WriteLine(" TUE");
+        break;
+    case 3:
+        Console.WriteLine("WED");
+        break;
+    case 4:
+        Console.WriteLine("THUR");
+        break;
+    case 5:
+        Console.WriteLine("FRI");
+        break;
+    case 6:
+        Console.WriteLine("SAT");
+        break;
+    case 7:
+        Console.WriteLine("SUN");
+        break;
+
+    default:
+        Console.WriteLine("No matches");
+        break;
+}
+
+Console.WriteLine("--------------------Loop statements-----------------------------------");
+
+int x = 1;
+
+while (x <= 4)
+{
+    Console.WriteLine("loop - while");
+    x++;
+}
+
+
+
+for (int y = 1; y <= 4; y++)
+    Console.WriteLine("loop - for");
+
+int a = 10;
+
+do
+{
+    Console.WriteLine("do loop");
+    a++;
+} while (a <= 5);
+
+
+
+Console.WriteLine("--------------------Logical loop statements-----------------------------------");
+
+int num = 10;
+Console.WriteLine("Print n numbers");
+for (int i=0;i<=num; i++)
+{
+   
+    Console.WriteLine(i + " ");
+}
+
+//sum of n numbers
+
+int n = 10;
+int sum = 0;
+
+for (int k = 0; k <= n; k++)
+{
+    sum = sum + k;
+}
+Console.WriteLine("sum of first 10 number is : "+ sum);
+
+
+// Factorial
+
+int fact = 1;
+
+for(int j = 1; j <= 5; j++)
+    {
+    fact = fact * j;
+        }
+Console.WriteLine("Factorial = " + fact);
+
+
+//patterns 
+
+for (int i =1;i <=5;i++)
+{
+    for (int j = 1; j <= i; j++)
+    {
+        Console.Write("*");
+    }
+    Console.WriteLine();
+}
+
+
+//Largest num in arr
+
+int[] arr = { 10, 20, 30, 40, 50 };
+
+
