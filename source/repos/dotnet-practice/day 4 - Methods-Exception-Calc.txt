@@ -1,0 +1,195 @@
+
+using System;
+
+class AgeException : Exception {
+ public AgeException(string message) :base (message){ }
+
+
+
+
+class Program
+{
+    static void Greet()                // without return type and No parameter
+    {
+        Console.WriteLine("Hello Kaviya!!");
+    }
+
+    static void Greet(String name)     // without return type and with  parameter
+    {
+        Console.WriteLine("welcomw!!"+name);
+    }
+
+    static int Add(int a,int b)        // with return type and parameter
+    {
+        return a + b;
+    }
+
+    static int Multiply(int x, int y)     // method overloading with diff parameters
+    {
+        return x * y;
+    }
+
+    static int Multiply(int x, int y, int z)
+    {
+        return x * y * z;
+    }
+
+    static int Factorial(int n)
+    {
+        if (n == 0)
+            return 1;
+        return n * Factorial(n - 1);
+    }
+
+
+// custom exception 
+
+        static void CheckAge(int age)
+        {
+            if (age < 18)
+            {
+                throw new AgeException("Age must be 18 or above");
+            }
+            Console.WriteLine("eligible to vote");
+        }
+
+
+
+        static void Main()
+        {
+            Console.WriteLine("--------------------class and methods-----------------------------------");
+            Greet();
+
+            Greet("sandhiya");
+
+            int result = Add(6, 7);
+            Console.WriteLine(result);
+
+            Console.WriteLine("Recursive method (Factorial):" + Factorial(5));
+
+            Console.WriteLine("--------------Method Overloading---------------");
+
+            Console.WriteLine("method with two parameter: " + (Multiply(5, 6)));
+            Console.WriteLine("method with three parameter: " + Multiply(5, 6, 7));
+
+            Console.WriteLine("--------------------Exception Handling-----------------------------------");
+
+
+            try
+            {
+                Console.Write("enter your age: ");
+                int age = int.Parse(Console.ReadLine());
+                CheckAge(age);
+
+            }
+            catch (AgeException ex)
+            {
+                Console.WriteLine("Custom error:" + ex.Message);
+            }
+            Console.WriteLine();
+
+
+
+            Console.WriteLine("-----------try block with catch and finally----------------------");
+            try
+            {
+                int a = 10;
+                int b = 0;
+                int res = a / b;
+                Console.WriteLine("Try block result", res);
+            }
+            catch (DivideByZeroException)
+            {
+                Console.WriteLine("cannot divide by zero");
+            }
+
+            finally
+            {
+                Console.WriteLine("Finally :This always executes");
+            }
+
+
+
+            Console.WriteLine();
+
+
+
+
+
+            Console.WriteLine("----------------try block with Multiple catches----------------------- ");
+            try
+            {
+                int[] arr = { 10, 20 };
+                Console.WriteLine(arr[5]);
+
+                int num = int.Parse("abc");
+            }
+
+            catch (FormatException ex)
+            {
+                Console.WriteLine("Format Error: " + ex.Message);
+            }
+            catch (IndexOutOfRangeException ex)
+            {
+                Console.WriteLine("Index Error: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("General Error: " + ex.Message);
+            }
+            finally
+            {
+                Console.WriteLine("Finally : Execution Completed.");   
+            }
+
+           
+            
+            
+            Console.WriteLine("--------------------Calculator -----------------------------------");
+            Console.WriteLine("Simple Calculator");
+
+            Console.Write("Enter first number: ");
+            double num1 = Convert.ToDouble(Console.ReadLine());
+
+            Console.Write("Enter operator (+, -, *, /): ");
+            char op = Convert.ToChar(Console.ReadLine());
+
+            Console.Write("Enter second number: ");
+            double num2 = Convert.ToDouble(Console.ReadLine());
+
+            double result;
+
+            switch (op)
+            {
+                case '+':
+                    result = num1 + num2;
+                    break;
+
+                case '-':
+                    result = num1 - num2;
+                    break;
+
+                case '*':
+                    result = num1 * num2;
+                    break;
+
+                case '/':
+                    if (num2 != 0)
+                        result = num1 / num2;
+                    else
+                    {
+                        Console.WriteLine("Cannot divide by zero!");
+                        return;
+                    }
+                    break;
+
+                default:
+                    Console.WriteLine("Invalid operator!");
+                    return;
+            }
+
+            Console.WriteLine("Result: " + result);
+
+        }
+    }
+}
