@@ -1,0 +1,105 @@
+using System;
+using System.ComponentModel;
+
+class Student
+{
+
+    public string name;
+    public int age;
+
+    public void display()
+    {
+        Console.WriteLine("Student Name:" + name);
+        Console.WriteLine("Student Age:" + age);
+    }
+
+    public int Add(int a, int b)
+    {
+        return a + b;
+    }
+
+}
+
+    class Person
+    {
+        private string place;   //--> encapsulation
+
+        public void setName(string n)
+        {
+            place = n;
+        }
+
+        public string getName()
+        {
+            return place;
+    }
+
+
+}
+
+
+
+class BankAccount {
+
+    private double balance;
+
+    public void Deposit(double amount)
+    {
+        balance = balance + amount;
+        Console.WriteLine("Deposited Amount: " + amount);
+    }
+
+    public void Withdraw(double amount)
+    {
+        if (amount <= balance)
+        {
+            balance = balance - amount;
+        Console.WriteLine("Deposited Amount: " + amount);
+        }
+        else
+        {
+            Console.WriteLine("Insufficient Balance!!");
+        }
+
+    }
+
+    public void Show()
+    {
+        Console.WriteLine("Current Balance: " + balance);
+    }
+
+
+}
+
+
+
+
+
+class Program
+{
+    static void Main()
+    {
+        Student s1 = new Student();  //--> object creation 
+
+        Console.WriteLine("---------------------------Object creation with Funcion Calling ------------------------------------- ");
+        s1.name="kaviya";
+        s1.age=23;
+        s1.display();
+
+        int res = s1.Add(20, 20);
+        Console.WriteLine("Add: " + res);
+
+        Console.WriteLine("--------------------------Encapsulation example with Get /set method--------------------------------");
+        Person p = new Person();
+        p.setName("chennai");
+        Console.WriteLine("place: "+ (p.getName()));
+
+        Console.WriteLine("-----------------------Encapsulation bank account - Deposit/Withdraw------------------------------ ");
+        BankAccount bank = new BankAccount();
+        bank.Deposit(5000);
+        bank.Withdraw(2000);
+        bank.Show();
+
+
+    }
+}
