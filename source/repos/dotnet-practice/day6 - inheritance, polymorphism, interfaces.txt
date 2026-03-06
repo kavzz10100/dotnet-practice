@@ -1,0 +1,160 @@
+
+using System.Drawing;
+
+class Animal
+{
+    public void Eat()
+    {
+        Console.WriteLine("Animal is eating");
+    }
+}
+
+class Dog : Animal              // --> single inheritance
+{
+    public void Bark()
+    {
+        Console.WriteLine("dog is barking");
+    }
+}
+
+class Puppy : Dog             //--> Multilevel inheritance
+{
+    public void Weep()
+    {
+        Console.WriteLine("Puppy weeps");
+    }
+}
+
+
+class Lion: Animal                                 // heirarchical Inheritance
+{
+    public void Hunt()
+    {
+        Console.WriteLine("Lion hunts the animals ");
+    }
+}
+
+class Deer: Animal
+{ 
+    public void Run()
+    {
+        Console.WriteLine("Deer runs faster ");
+    }
+}
+
+class Calculator {    
+
+public int add(int a, int b)    //Polymorphism 
+    {
+        return a + b;
+    }
+
+public int add(int a, int b, int c)  // method overloading
+    {
+        return a + b + c;
+    }
+}
+
+
+class Shape                   // polymorphism - method overriding
+{
+    public virtual void Draw()  //Base class method must use virtual
+    {
+        Console.WriteLine("Drawing a shape");
+    }
+}
+
+class Circle : Shape
+{
+    public override void Draw()   // ---> (override Method)  Child class method must use override
+    {
+        Console.WriteLine("Drawing a Circle");
+    }
+}
+
+class Sphere : Shape
+{
+    public override void Draw()
+    {
+        Console.WriteLine("Drawing a Sphere");
+    }
+}
+
+interface Square               // Multiple Inheritance using Interfaces 
+{
+    void AreaOfSquare();
+}
+
+interface Rectangle
+{
+    void AreaOfRectangle();   // method signatures only
+}
+
+
+class Area: Square, Rectangle
+{
+    public void AreaOfSquare()  // method difinitions (Implementation)
+    {
+        Console.WriteLine(" this is Area of Square");
+    }
+
+    public void AreaOfRectangle()
+    {
+        Console.WriteLine(" this is Area of Rectangle");
+    }
+
+}
+
+class Program
+{
+    
+    static void Main()
+    {
+
+        Console.WriteLine("---------Inheritence---------");
+        Console.WriteLine("*****level 1 Inheritance - single *******");
+        Dog d =new Dog();
+        d.Eat();
+        d.Bark();
+        Console.WriteLine();
+
+        Console.WriteLine("*****level 2 Inheritance -Multilevel *******");
+        Puppy pup = new Puppy();
+        pup.Eat();
+        pup.Bark();
+        pup.Weep();
+        Console.WriteLine();
+
+        Console.WriteLine("--------- Heirarchy Inheritence---------");
+        Lion lion = new Lion();
+        lion.Eat();
+        lion.Hunt();
+        Console.WriteLine();
+
+        Deer deer = new Deer();
+        deer.Eat();
+        deer.Run();
+        Console.WriteLine();
+
+        Console.WriteLine("---------polymorphism - method overloading ---------");
+        Calculator c = new Calculator();
+        Console.WriteLine("Addtion ( 2 params ) :" + (c.add(40, 50)));
+        Console.WriteLine("Addtion  ( 3 params ) :" + (c.add(40, 50,60)));
+        Console.WriteLine();
+
+        Console.WriteLine("---------polymorphism - method overriding ---------");
+        Shape s;
+        s = new Circle();
+        s.Draw();
+
+        s = new Sphere();
+        s.Draw();
+
+        Console.WriteLine("---------Multiple inheritance using interfaces  ---------");
+        Area a = new Area();
+        a.AreaOfSquare();
+        a.AreaOfRectangle();
+
+
+    }
+}
