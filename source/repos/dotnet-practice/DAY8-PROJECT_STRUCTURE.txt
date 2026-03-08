@@ -1,0 +1,102 @@
+The project was created using the following command:
+
+dotnet new webapp -n MyWebApp
+cd MyWebApp
+dotnet run
+
+
+After running the application, the web server starts and the application can be accessed through the browser using:
+
+https://localhost:5001
+
+# ASP.NET Core Web App – Project Structure
+
+## Overview
+
+This project was created using the **ASP.NET Core CLI**.
+The purpose of this project is to understand the basic structure of an ASP.NET Core web application and how different components work together.
+
+---
+
+## Creating the Project
+
+The project was created using the following command:
+
+```
+dotnet new webapp -n MyWebApp
+cd MyWebApp
+dotnet run
+```
+
+After running the application, the web server starts and the application can be accessed through the browser using:
+
+```
+https://localhost:5001
+```
+
+---
+
+## Project Folder Structure
+
+```
+MyWebApp
+│
+├── Pages
+│   ├── Index.cshtml
+│   ├── Privacy.cshtml
+│   └── Shared
+│
+├── wwwroot
+│   ├── css
+│   ├── js
+│   └── images
+│
+├── appsettings.json
+├── Program.cs
+├── MyWebApp.csproj
+└── README.md
+
+1. Program.cs
+
+This is the entry point of the application.
+
+
+2. Pages Folder
+
+This folder contains Razor Pages, which define the UI of the application.
+
+Index.cshtml → Home page
+
+Privacy.cshtml → Privacy page
+
+
+3. wwwroot Folder
+
+This folder contains static files used by the web application.
+
+Examples:
+
+CSS files for styling
+
+JavaScript files for functionality
+
+Images and other static resources
+
+
+4. appsettings.json
+
+This file stores configuration settings such as logging configuration and connection strings.
+
+
+5. .csproj File
+
+The .csproj file defines the project configuration, including:
+
+Target .NET framework
+
+Dependencies
+
+Build settings
+
+
+
