@@ -1,1 +1,53 @@
 
+// middleware - Request Pipeline
+
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+builder.Services.AddRazorPages();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Error");
+    app.UseHsts();
+}
+
+app.UseHttpsRedirection();
+
+app.UseRouting();
+
+//  Custom Middleware
+app.Use(async (context, next) =>
+{
+    var path = context.Request.Path;
+
+    string type = "Other";
+
+    if (path == "/")
+        type = "Razor Page";
+    else if (path.Value.EndsWith(".css"))
+        type = "CSS";
+    else if (path.Value.EndsWith(".js"))
+        type = "JavaScript";
+    else if (path.Value.EndsWith(".png") || path.Value.EndsWith(".jpg") || path.Value.EndsWith(".ico"))
+        type = "Image";
+
+    Console.WriteLine($"\n[{type}] Request Started: {path}");
+
+    await next();
+
+    Console.WriteLine($"[{type}] Request Finished: {path}");
+});
+
+app.UseAuthorization();
+
+app.MapStaticAssets();
+
+app.MapRazorPages()
+   .WithStaticAssets();
+
+app.Run();
