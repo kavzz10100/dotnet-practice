@@ -1,10 +1,23 @@
 
-// middleware - Request Pipeline
+/* middleware - Request Pipeline
+
+When the browser loads a page, it sends multiple HTTP requests, not just one.
+Example resources requested:
+
+Razor Page (/)
+CSS files
+JavaScript files
+Bootstrap libraries
+jQuery
+Images (favicon)
+Each of these requests passes through the middleware.
+*/
+
 
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
