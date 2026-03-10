@@ -1,0 +1,200 @@
+
+/* middleware - Request Pipeline
+When the browser loads a page, it sends multiple HTTP requests, not just one.
+Example resources requested:
+Razor Page (/)
+CSS files
+JavaScript files
+Bootstrap libraries
+jQuery
+Images (favicon)
+Each of these requests passes through the middleware.
+
+
+Routing code 
+
+
+
+
+
+*/
+
+
+
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+builder.Services.AddRazorPages();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Error");
+    app.UseHsts();
+}
+
+app.UseHttpsRedirection();
+
+app.UseRouting();
+
+//  Custom Middleware
+app.Use(async (context, next) =>
+{
+    var method = context.Request.Method;
+    var path = context.Request.Path;
+
+    Console.WriteLine($"\n[{method}] Request Started → {path}");
+
+    await next();
+
+    Console.WriteLine($"[{method}] Request Finished → {path}");
+});
+
+app.UseAuthorization();
+
+app.MapStaticAssets();
+
+app.MapRazorPages()
+   .WithStaticAssets();
+
+app.Run();
+
+
+
+
+
+
+-------------------------------------------------------------------
+Example flow :
+
+Browser
+   ↓
+Middleware logs request
+   ↓
+Routing finds DemoController
+   ↓
+Index() action executes
+   ↓
+Response returned
+   ↓
+Middleware logs finished
+
+
+--------------------------------------------------------------------------------
+console output:
+
+
+[GET] Request Started → /Home
+[GET] Request Finished → /Home
+
+[GET] Request Started → /
+[GET] Request Finished → /
+
+[GET] Request Started → /MyFirstWebApp.7a9v1aoe48.styles.css
+
+[GET] Request Started → /lib/jquery/dist/jquery.min.o1o13a6vjx.js
+
+[GET] Request Started → /lib/bootstrap/dist/js/bootstrap.bundle.min.493y06b0oq.js
+
+[GET] Request Started → /lib/bootstrap/dist/css/bootstrap.min.46ein0sx1k.css
+
+[GET] Request Started → /css/site.b9sayid5wm.css
+
+[GET] Request Started → /js/site.xtxxf3hu2r.js
+[GET] Request Finished → /js/site.xtxxf3hu2r.js
+[GET] Request Finished → /css/site.b9sayid5wm.css
+[GET] Request Finished → /MyFirstWebApp.7a9v1aoe48.styles.css
+[GET] Request Finished → /lib/bootstrap/dist/js/bootstrap.bundle.min.493y06b0oq.js
+[GET] Request Finished → /lib/bootstrap/dist/css/bootstrap.min.46ein0sx1k.css
+[GET] Request Finished → /lib/jquery/dist/jquery.min.o1o13a6vjx.js
+
+[GET] Request Started → /
+[GET] Request Finished → /
+
+[GET] Request Started → /MyFirstWebApp.7a9v1aoe48.styles.css
+
+[GET] Request Started → /css/site.b9sayid5wm.css
+
+[GET] Request Started → /lib/bootstrap/dist/css/bootstrap.min.46ein0sx1k.css
+[GET] Request Finished → /css/site.b9sayid5wm.css
+
+
+[GET] Request Started → /css/site.b9sayid5wm.css
+
+[GET] Request Started → /lib/bootstrap/dist/css/bootstrap.min.46ein0sx1k.css
+[GET] Request Finished → /css/site.b9sayid5wm.css
+[GET] Request Finished → /MyFirstWebApp.7a9v1aoe48.styles.css
+[GET] Request Finished → /lib/bootstrap/dist/css/bootstrap.min.46ein0sx1k.css
+
+[GET] Request Started → /js/site.xtxxf3hu2r.js
+[GET] Request Finished → /js/site.xtxxf3hu2r.js
+
+[GET] Request Started → /lib/jquery/dist/jquery.min.o1o13a6vjx.js
+[GET] Request Finished → /lib/jquery/dist/jquery.min.o1o13a6vjx.js
+
+[GET] Request Started → /lib/bootstrap/dist/js/bootstrap.bundle.min.493y06b0oq.js
+[GET] Request Finished → /lib/bootstrap/dist/js/bootstrap.bundle.min.493y06b0oq.js
+
+[GET] Request Started → /Privacy
+[GET] Request Finished → /Privacy
+
+[GET] Request Started → /lib/bootstrap/dist/css/bootstrap.min.46ein0sx1k.css
+
+[GET] Request Started → /css/site.b9sayid5wm.css
+
+[GET] Request Started → /MyFirstWebApp.7a9v1aoe48.styles.css
+[GET] Request Finished → /css/site.b9sayid5wm.css
+
+[GET] Request Started → /lib/bootstrap/dist/js/bootstrap.bundle.min.493y06b0oq.js
+[GET] Request Finished → /MyFirstWebApp.7a9v1aoe48.styles.css
+
+
+[GET] Request Started → /lib/jquery/dist/jquery.min.o1o13a6vjx.js
+[GET] Request Finished → /lib/bootstrap/dist/css/bootstrap.min.46ein0sx1k.css
+
+[GET] Request Started → /js/site.xtxxf3hu2r.js
+[GET] Request Finished → /lib/bootstrap/dist/js/bootstrap.bundle.min.493y06b0oq.js
+[GET] Request Finished → /js/site.xtxxf3hu2r.js
+[GET] Request Finished → /lib/jquery/dist/jquery.min.o1o13a6vjx.js
+
+[GET] Request Started → /
+[GET] Request Finished → /
+
+[GET] Request Started → /MyFirstWebApp.7a9v1aoe48.styles.css
+
+[GET] Request Started → /lib/bootstrap/dist/css/bootstrap.min.46ein0sx1k.css
+[GET] Request Finished → /MyFirstWebApp.7a9v1aoe48.styles.css
+
+[GET] Request Started → /css/site.b9sayid5wm.css
+
+[GET] Request Started → /lib/jquery/dist/jquery.min.o1o13a6vjx.js
+
+[GET] Request Started → /lib/bootstrap/dist/js/bootstrap.bundle.min.493y06b0oq.js
+
+[GET] Request Started → /js/site.xtxxf3hu2r.js
+[GET] Request Finished → /css/site.b9sayid5wm.css
+[GET] Request Finished → /lib/bootstrap/dist/css/bootstrap.min.46ein0sx1k.css
+[GET] Request Finished → /lib/jquery/dist/jquery.min.o1o13a6vjx.js
+[GET] Request Finished → /js/site.xtxxf3hu2r.js
+[GET] Request Finished → /lib/bootstrap/dist/js/bootstrap.bundle.min.493y06b0oq.js
+
+[GET] Request Started → /Demo/Index
+[GET] Request Finished → /Demo/Index
+
+[GET] Request Started → /Demo/About
+[GET] Request Finished → /Demo/About
+
+[GET] Request Started → /Demo/Contact
+[GET] Request Finished → /Demo/Contact
+
+
+-------------------------------------------------------------------------------
+
+
+
+
+
+
