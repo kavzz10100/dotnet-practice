@@ -1,0 +1,57 @@
+
+//DemoController.cs
+
+using Microsoft.AspNetCore.Mvc;
+
+
+namespace MyFirstWebApp.Controllers
+{
+    public class DemoController :Controller
+    {
+        public IActionResult Index()
+        {
+            Console.WriteLine("[Controller] DemoController.Index Executed");
+            return Content("Demo Index Page");
+        }
+
+        public IActionResult About()
+        {
+            Console.WriteLine("[Controller] DemoController.About Executed");
+            return Content("Demo About Page");
+        }
+
+        public IActionResult Contact()
+        {
+            Console.WriteLine("[Controller] DemoController.Contact Executed");
+            return Content("Demo Contact Page");
+        }
+    }
+}
+---------------------------------------------------------------------------------
+Output from console:
+
+[GET] Request Started → /Demo/Index
+[GET] Request Finished → /Demo/Index
+
+[GET] Request Started → /Demo/About
+[GET] Request Finished → /Demo/About
+
+[GET] Request Started → /Demo/Contact
+[GET] Request Finished → /Demo/Contact got this  
+
+
+
+
+FLow:
+
+Browser Request
+      ↓
+Middleware
+      ↓
+Routing
+      ↓
+DemoController
+      ↓
+ Actions
+      ↓
+Response
