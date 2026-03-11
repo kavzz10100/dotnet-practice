@@ -1,0 +1,112 @@
+/*
+MyFirstWebApp
+│
+├── Controllers
+│    DemoController.cs
+│
+├── Services
+│    ILogService.cs
+│    LogService.cs
+│
+└── Program.cs
+
+*/
+
+using MyFirstWebApp.Services;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services
+builder.Services.AddRazorPages();
+builder.Services.AddControllers();
+
+// Register DI service
+builder.Services.AddTransient<ILogService, LogService>();
+
+var app = builder.Build();
+
+app.UseHttpsRedirection();
+
+app.UseRouting();
+
+// Middleware
+app.Use(async (context, next) =>
+{
+    var method = context.Request.Method;
+    var path = context.Request.Path;
+
+    Console.WriteLine($"\n[{method}] Request Started → {path}");
+
+    await next();
+
+    Console.WriteLine($"[{method}] Request Finished → {path}");
+});
+
+app.UseAuthorization();
+
+app.MapControllers();
+app.MapRazorPages();
+
+app.Run();
+
+----------------------------------------------------------------------------------------
+ILogService.cs
+
+namespace MyFirstWebApp.Services
+{
+    public interface ILogService
+    {
+        void Log(string message);
+    }
+}
+
+---------------------------------------------------------------------------------------
+LogService.cs
+
+namespace MyFirstWebApp.Services
+{
+    public class LogService : ILogService
+
+    {
+        public LogService()
+        {
+            Console.WriteLine("[Service] LogService Instance Created");
+        }
+        public void Log(string message)
+        {
+            Console.WriteLine($"[Service] {message}");
+        }
+
+    }
+}
+
+----------------------------------------------------------------------------------------
+
+
+output from Console :
+
+[GET] Request Started → /demo/contact
+[Service] LogService Instance Created
+[Service] DemoController.Contact Executed
+[GET] Request Finished → /demo/contact
+
+[GET] Request Started → /
+
+[GET] Request Started → /demo/index
+[Service] LogService Instance Created
+[Service] DemoController.Index Executed
+[GET] Request Finished → /demo/index
+[GET] Request Finished → /
+
+[GET] Request Started → /demo/about
+[Service] LogService Instance Created
+[Service] DemoController.About Executed
+[GET] Request Finished → /demo/about
+
+
+
+
+
+
+
+
