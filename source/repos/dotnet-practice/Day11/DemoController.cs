@@ -1,3 +1,25 @@
+/*
+Browser Request
+      ↓
+HTTPS Redirection
+      ↓
+Routing
+      ↓
+Custom Middleware (Request Started)
+      ↓
+Controller Action Executes
+      ↓
+Dependency Injection Creates LogService
+      ↓
+Controller Uses Service
+      ↓
+Custom Middleware (Request Finished)
+      ↓
+Response Sent
+*/
+
+
+
 using Microsoft.AspNetCore.Mvc;
 using MyFirstWebApp.Services;
 
