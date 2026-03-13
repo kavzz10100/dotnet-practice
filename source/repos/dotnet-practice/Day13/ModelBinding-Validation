@@ -1,0 +1,133 @@
+Day 13 – ASP.NET Core Model Binding & Validation 
+
+Overview
+
+This project demonstrates Model Binding and Validation in ASP.NET Core MVC using an Employee Form.
+It shows how form data from the browser is automatically mapped to a C# model object and validated using Data Annotations before processing.
+
+The project also logs the request pipeline flow using custom middleware.
+
+Technologies Used
+
+ASP.NET Core MVC
+
+C#
+
+Razor Views
+
+Middleware Logging
+
+Data Annotations Validation
+
+Project Structure
+MyFirstWebApp
+│
+├── Controllers
+│     ├── DemoController.cs
+│     └── EmployeeController.cs
+│
+├── Models
+│     └── Employee.cs
+│
+├── Views
+│     └── Employee
+│          └── Create.cshtml
+│
+├── Services
+│     ├── ILogService.cs
+│     └── LogService.cs
+│
+├── wwwroot
+└── Program.cs
+Employee Model
+
+The Employee model defines the structure of the form data and includes validation rules.
+
+Example fields:
+
+EmpId
+
+Name
+Mail
+Phone
+Designation
+Department
+Status
+DOJ (Date of Joining)
+
+Validation attributes ensure that required fields are filled and the email/phone formats are correct.
+
+Model Binding
+
+Model Binding automatically maps form input values to a C# model object.
+
+Example:
+
+Form Input
+Name = Kaviya
+Mail = kaviya@gmail.com
+
+becomes
+
+Employee emp = new Employee();
+emp.Name = "Kaviya";
+emp.Mail = "kaviya@gmail.com";
+
+This object is then passed to the controller action.
+
+Validation
+
+ASP.NET Core uses Data Annotations to validate the model.
+-------------------------------------------------------------------------------------
+Common validation attributes used:
+
+Required
+EmailAddress
+Phone
+DataType(Date)
+Validation is checked in the controller using:
+
+ModelState.IsValid
+
+If validation fails, the form reloads with error messages.
+---------------------------------------------------------------------
+Request Workflow
+Browser Request
+      │
+      
+Middleware Pipeline
+(Logs Request Start & End)
+      │
+      
+Routing
+      │
+      
+Controller Action
+      │
+      
+Model Binding
+(Form Data → Employee Object)
+      │
+      
+Validation
+(Data Annotation Rules)
+      │
+      
+Controller Logic
+      │
+      
+Response Returned to Browser
+-----------------------------------------------------------
+Example URLs
+
+Open Employee Form:
+
+/employee/create
+
+------------------------------------------------------------------
+Example Output
+
+After submitting valid form data:
+
+Employee Kaviya Created Successfully
+
