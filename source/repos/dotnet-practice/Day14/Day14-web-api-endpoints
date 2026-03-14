@@ -1,0 +1,311 @@
+# ASP.NET Core Employee Web API ( Day 14 Practice)
+
+## Overview
+
+This project demonstrates ** Simple Web API Endpoints** using ASP.NET Core MVC.
+An employee form is used to create employee records, and API endpoints allow retrieving employee data.
+
+The application stores employee data in **temporary in-memory storage (`List<Employee>`)**.
+
+---
+
+## Features
+
+* Employee creation using an HTML form
+* Model Binding using `Employee` model
+* Data validation using Data Annotations
+* Simple Web API with three endpoints:
+
+  * Create Employee
+  * Get All Employees
+  * Get Employee By ID
+
+---
+
+## Project Structure
+
+```
+MyFirstWebApp
+│
+├── Controllers
+│     └── EmployeeController.cs
+│
+├── Models
+│     └── Employee.cs
+│
+├── Views
+│     ├── Employee
+│     │     └── Create.cshtml
+│     └── _ViewImports.cshtml
+│
+└── Program.cs
+```
+
+---
+
+## Employee Model
+
+The `Employee` model includes validation using **DataAnnotations**.
+
+Fields:
+
+* EmpId
+* Name
+* Mail
+* Phone
+* Designation
+* Department
+* Status
+* DOJ (Date of Joining)
+
+---
+
+## API Endpoints
+
+### Create Employee (Form)
+
+```
+GET /employee/create
+```
+
+Displays the employee creation form.
+
+```
+POST /employee/create
+```
+
+Submits employee details and stores them in memory.
+
+---
+
+### Get All Employees
+
+```
+GET /employee
+```
+
+Returns all employees in JSON format.
+
+Example Response:
+
+```
+[
+ {
+  "empId": 1001,
+  "name": "sandy",
+  "mail": "sandy@gmail.com",
+  "phone": "9401516967",
+  "designation": "Developer",
+  "department": "IT",
+  "status": "Active",
+  "doj": "2026-03-31T00:00:00"
+}
+]
+```
+
+---
+
+### Get Employee By ID
+
+```
+GET /employee/{id}
+```
+
+Example:
+
+```
+/employee/1000
+```
+
+Returns the employee with the specified ID.
+{
+  "empId": 1000,
+  "name": "kavi",
+  "mail": "kavi@gmail.com",
+  "phone": "6381780483",
+  "designation": "Developer",
+  "department": "IT",
+  "status": "Active",
+  "doj": "2026-03-24T00:00:00"
+}
+
+---
+
+## Workflow
+
+```
+User opens employee form
+        ↓
+GET /employee/create
+        ↓
+User submits form
+        ↓
+POST /employee/create
+        ↓
+Employee stored in List<Employee>
+        ↓
+GET /employee → Retrieve all employees
+GET /employee/{id} → Retrieve specific employee
+```
+
+---------------------------------------------------------------------------------
+*********Controllers/EmployeeController.cs**********8
+
+
+using Microsoft.AspNetCore.Mvc;
+using MyFirstWebApp.Models;
+
+namespace MyFirstWebApp.Controllers
+{
+    [Route("employee")]
+    public class EmployeeController : Controller
+    {
+        // temporary in-memory storage
+        private static List<Employee> employees = new List<Employee>();
+
+        // GET: /employee/create
+        [HttpGet("create")]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: /employee/create
+        [HttpPost("create")]
+        public IActionResult Create([FromForm] Employee emp)
+        {
+            Console.WriteLine($"EmpId: {emp.EmpId}");
+            Console.WriteLine($"Name: {emp.Name}");
+
+            employees.Add(emp);
+
+            return Content($"Employee {emp.Name} Created Successfully");
+        }
+
+        // GET: /employee
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            if (employees.Count == 0)
+            {
+                return Content("No employees found");
+            }
+
+            return Json(employees);
+        }
+
+        // GET: /employee/101
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var emp = employees.FirstOrDefault(e => e.EmpId == id);
+
+            if (emp == null)
+            {
+                return Content($"Employee with ID {id} not found");
+            }
+
+            return Json(emp);
+        }
+    }
+}
+
+----------------------------------------------------------------------------------
+
+*******************Models/Employee.cs***********************
+
+using System.ComponentModel.DataAnnotations;
+
+namespace MyFirstWebApp.Models
+{
+    public class Employee
+    {
+        [Required]
+        public int EmpId { get; set; }
+
+        [Required]
+        public string Name { get; set; }
+
+        [Required]
+        [EmailAddress]
+        public string Mail { get; set; }
+
+        [Required]
+        [Phone]
+        public string Phone { get; set; }
+
+        [Required]
+        public string Designation { get; set; }
+
+        [Required]
+        public string Department { get; set; }
+
+        [Required]
+        public string Status { get; set; }
+
+        [Required]
+        public DateTime DOJ { get; set; }
+    }
+}
+------------------------------------------------------------------------------
+
+Console Output:
+
+
+[GET] Request Started → /employee/create
+[GET] Request Finished → /employee/create
+
+[POST] Request Started → /employee/create
+EmpId: 1000
+Name: kavi
+[POST] Request Finished → /employee/create
+
+[GET] Request Started → /employee
+[GET] Request Finished → /employee
+
+[GET] Request Started → /employee/1000
+[GET] Request Finished → /employee/1000
+
+[GET] Request Started → /employee/create
+[GET] Request Finished → /employee/create
+
+[POST] Request Started → /employee/create
+EmpId: 1001
+Name: sandy
+[POST] Request Finished → /employee/create
+
+[GET] Request Started → /employee
+[GET] Request Finished → /employee
+
+[GET] Request Started → /employee/1001
+[GET] Request Finished → /employee/1001
+
+[GET] Request Started → /employee/1000
+[GET] Request Finished → /employee/1000
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
