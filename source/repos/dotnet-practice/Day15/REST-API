@@ -1,1 +1,115 @@
+# Employee REST API – ASP.NET Core
+
+## Overview
+
+This project is a simple **RESTful Web API** built using **ASP.NET Core**.
+It demonstrates basic CRUD operations (Create, Read, Update, Delete) for managing employee records.
+
+The API is tested using **Swagger UI**, which provides an interactive interface to execute HTTP requests.
+
+---
+
+## Technologies Used
+
+* ASP.NET Core Web API
+* C#
+* Swagger UI (API testing)
+* REST Architecture
+
+---
+
+## Employee Model
+
+The Employee model contains the following fields:
+
+* EmpId
+* Name
+* Mail
+* Phone
+* Designation
+* Department
+* Status
+* DOJ (Date of Joining)
+
+All fields are required and validated using **DataAnnotations**.
+
+---
+
+## API Endpoints
+
+### 1. Get All Employees
+
+**Method:** GET
+**Endpoint:** `/api/employees`
+
+Returns the list of all employees.
+
+---
+
+### 2. Get Employee by ID
+
+**Method:** GET
+**Endpoint:** `/api/employees/{id}`
+
+Returns employee details for the given ID.
+
+---
+
+### 3. Create Employee
+
+**Method:** POST
+**Endpoint:** `/api/employees`
+
+Creates a new employee record.
+
+---
+
+### 4. Update Employee
+
+**Method:** PUT
+**Endpoint:** `/api/employees/{id}`
+
+Updates an existing employee using the provided ID.
+
+---
+
+### 5. Delete Employee
+
+**Method:** DELETE
+**Endpoint:** `/api/employees/{id}`
+
+Deletes the employee with the specified ID.
+
+---
+
+## How to Run the Project
+
+1. Open the project in **Visual Studio**.
+2. Build the project.
+3. Run the application.
+4. Swagger UI will open automatically.
+
+Swagger URL example:
+
+```
+https://localhost:5037/swagger
+```
+
+---
+
+## Testing the API
+
+Use **Swagger UI** to test all API endpoints by sending HTTP requests such as GET, POST, PUT, and DELETE.
+
+---
+
+## REST API Flow
+
+Client Request
+↓
+Controller receives request
+↓
+Processes Employee data
+↓
+Returns JSON response
 
