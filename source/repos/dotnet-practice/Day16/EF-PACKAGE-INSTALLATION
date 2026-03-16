@@ -1,0 +1,28 @@
+                                             Day 16 – Entity Framework Core Package Installation
+                                                              Overview
+
+Entity Framework Core (EF Core) is an Object Relational Mapper (ORM) that allows developers to interact with a database using C# objects instead of writing SQL queries. It simplifies database operations such as creating tables, inserting data, updating records, and retrieving information.
+
+Objective
+
+The objective of this task is to install the required EF Core packages in the ASP.NET Core project to enable database integration.
+
+Installed Packages
+The following packages were installed:
+
+Microsoft.EntityFrameworkCore – Core ORM functionality
+Microsoft.EntityFrameworkCore.SqlServer – SQL Server database provider
+Microsoft.EntityFrameworkCore.Tools – Supports migration commands
+Microsoft.EntityFrameworkCore.Design – Provides design-time services for migrations
+
+Installation Commands
+
+The packages were installed using the .NET CLI:
+
+dotnet add package Microsoft.EntityFrameworkCore
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+dotnet add package Microsoft.EntityFrameworkCore.Tools
+dotnet add package Microsoft.EntityFrameworkCore.Design
+Result
+
+After installation, the packages appear under the Dependencies → Packages section of the project in Visual Studio. This prepares the application for configuring a database connection and creating a DbContext in the next step.
