@@ -1,0 +1,36 @@
+# Day 17 – SQL Server Connection & DbContext
+
+## Overview
+
+Configured database connectivity using SQL Server (LocalDB) and implemented Entity Framework Core DbContext for data access.
+
+## Steps Completed
+
+* Installed and used **SQL Server LocalDB**
+* Added connection string in `appsettings.json`
+* Created `Employee` model
+* Implemented `AppDbContext` class
+* Registered DbContext in `Program.cs`
+* Applied EF Core migrations
+
+## Commands Used
+
+```bash
+dotnet ef migrations add InitialCreate
+dotnet ef database update
+```
+
+## Output
+
+* Database: `EmployeeDB` created
+* Table: `Employees` created successfully
+* Migration applied and tracked in `__EFMigrationsHistory`
+
+## Conclusion
+
+Successfully established SQL Server connection and configured DbContext using Entity Framework Core.
+✔ SQL Server connection (LocalDB) ✅
+✔ DbContext created ✅
+✔ Database created ✅
+✔ Table created ✅
+✔ Migration applied ✅
