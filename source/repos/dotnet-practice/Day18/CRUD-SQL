@@ -1,0 +1,148 @@
+     ********** DAY 18 -Employee CRUD Web API using ASP.NET Core & SQL Server********
+
+## Overview
+
+This project demonstrates CRUD (Create, Read, Update, Delete) operations using ASP.NET Core Web API connected to SQL Server.
+
+## Technologies Used
+
+* ASP.NET Core Web API
+* Entity Framework Core
+* SQL Server
+* Swagger UI
+
+## Database
+
+* Database Name: EmployeeDB
+* Table: Employee
+
+## Features
+
+* Create new employee (POST)
+* Retrieve all employees (GET)
+* Retrieve employee by ID (GET by ID)
+* Update employee details (PUT)
+* Delete employee (DELETE)
+
+## API Endpoints
+
+* GET /api/employees
+* GET /api/employees/{id}
+* POST /api/employees
+* PUT /api/employees/{id}
+* DELETE /api/employees/{id}
+
+## Connection String
+
+Server=localhost\SQLEXPRESS;Database=EmployeeDB;Trusted_Connection=True;TrustServerCertificate=True;
+
+## Result
+
+Al✔ Connected API to SQL Server
+✔ Used SQL Server Management Studio database
+✔ Implemented:
+
+POST (Create) ✅
+GET (All) ✅
+GET by ID ✅
+PUT (Update) ✅
+DELETE ✅
+✔ Verified in Swagger + DB reflection 💯l CRUD operations were successfully tested using Swagger UI and verified in SQL Server.
+
+
+----------------------------------------------------------------------------------
+
+***************** CORRESPONDING OUTPUT FROM CONSOLE ******************************
+
+
+
+[GET] Request Started → /api/employees
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (181ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT [e].[EmpId], [e].[DOJ], [e].[Department], [e].[Designation], [e].[Mail], [e].[Name], [e].[Phone], [e].[Status]
+      FROM [Employee] AS [e]
+[GET] Request Finished → /api/employees
+
+[GET] Request Started → /api/employees
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (484ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT [e].[EmpId], [e].[DOJ], [e].[Department], [e].[Designation], [e].[Mail], [e].[Name], [e].[Phone], [e].[Status]
+      FROM [Employee] AS [e]
+[GET] Request Finished → /api/employees
+
+[GET] Request Started → /api/employees/2
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (302ms) [Parameters=[@p='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [e].[EmpId], [e].[DOJ], [e].[Department], [e].[Designation], [e].[Mail], [e].[Name], [e].[Phone], [e].[Status]
+      FROM [Employee] AS [e]
+      WHERE [e].[EmpId] = @p
+[GET] Request Finished → /api/employees/2
+
+
+[PUT] Request Started → /api/employees/2
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (11ms) [Parameters=[@p='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [e].[EmpId], [e].[DOJ], [e].[Department], [e].[Designation], [e].[Mail], [e].[Name], [e].[Phone], [e].[Status]
+      FROM [Employee] AS [e]
+      WHERE [e].[EmpId] = @p
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (25ms) [Parameters=[@p2='?' (DbType = Int32), @p0='?' (Size = 4000), @p1='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+      SET IMPLICIT_TRANSACTIONS OFF;
+      SET NOCOUNT ON;
+      UPDATE [Employee] SET [Department] = @p0, [Designation] = @p1
+      OUTPUT 1
+      WHERE [EmpId] = @p2;
+[PUT] Request Finished → /api/employees/2
+
+[GET] Request Started → /api/employees/2
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (10ms) [Parameters=[@p='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [e].[EmpId], [e].[DOJ], [e].[Department], [e].[Designation], [e].[Mail], [e].[Name], [e].[Phone], [e].[Status]
+      FROM [Employee] AS [e]
+      WHERE [e].[EmpId] = @p
+[GET] Request Finished → /api/employees/2
+
+[GET] Request Started → /api/employees
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (6ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT [e].[EmpId], [e].[DOJ], [e].[Department], [e].[Designation], [e].[Mail], [e].[Name], [e].[Phone], [e].[Status]
+      FROM [Employee] AS [e]
+[GET] Request Finished → /api/employees
+
+
+[POST] Request Started → /api/employees
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (58ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+      SET IMPLICIT_TRANSACTIONS OFF;
+      SET NOCOUNT ON;
+      INSERT INTO [Employee] ([DOJ], [Department], [Designation], [Mail], [Name], [Phone], [Status])
+      OUTPUT INSERTED.[EmpId]
+      VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+[POST] Request Finished → /api/employees
+
+[GET] Request Started → /api/employees
+[GET] Request Finished → /api/employees
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (17ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT [e].[EmpId], [e].[DOJ], [e].[Department], [e].[Designation], [e].[Mail], [e].[Name], [e].[Phone], [e].[Status]
+      FROM [Employee] AS [e]
+
+[DELETE] Request Started → /api/employees/3
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (14ms) [Parameters=[@p='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [e].[EmpId], [e].[DOJ], [e].[Department], [e].[Designation], [e].[Mail], [e].[Name], [e].[Phone], [e].[Status]
+      FROM [Employee] AS [e]
+      WHERE [e].[EmpId] = @p
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (8ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SET IMPLICIT_TRANSACTIONS OFF;
+      SET NOCOUNT ON;
+      DELETE FROM [Employee]
+      OUTPUT 1
+      WHERE [EmpId] = @p0;
+[DELETE] Request Finished → /api/employees/3
+
+
+
+
+
