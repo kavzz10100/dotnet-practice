@@ -74,3 +74,28 @@ Controller → Service → Repository → Database
 ## ✅ Outcome
 
 Implemented a clean and scalable backend architecture suitable for real-world applications and product-based company standards.
+
+CONSOLE OUTPUT:
+
+
+[GET] Request Started → /api/employees
+👉 Controller: GetAll called
+👉 Service: Fetching employees
+👉 Repository: Getting data from DB
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (100ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT [e].[EmpId], [e].[DOJ], [e].[Department], [e].[Designation], [e].[Mail], [e].[Name], [e].[Phone], [e].[Status]
+      FROM [Employee] AS [e]
+[GET] Request Finished → /api/employees
+
+
+
+This shows EXACT flow:
+Controller → Service → Repository → Database
+
+✔ Request hits Controller
+✔ Controller calls Service
+✔ Service calls Repository
+✔ Repository hits DB
+
+
