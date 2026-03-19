@@ -1,0 +1,76 @@
+# Employee Management API (Service + Repository Pattern)
+
+## 📌 Overview
+
+This is a RESTful Web API built using ASP.NET Core that manages employee data.
+The project follows the **Service Layer + Repository Pattern** to ensure clean architecture and separation of concerns.
+
+---
+
+## 🏗️ Architecture
+
+Controller → Service Layer → Repository → DbContext → SQL Server
+
+* **Controller**: Handles HTTP requests and responses
+* **Service Layer**: Contains business logic
+* **Repository**: Handles database operations
+* **DbContext**: Connects to SQL Server using Entity Framework Core
+
+---
+
+## 📂 Project Structure
+
+* Controllers/
+* Services/
+* Repositories/
+* Models/
+* Data/
+
+---
+
+## ⚙️ Features
+
+* Get all employees
+* Get employee by ID
+* Create new employee
+* Update employee
+* Delete employee
+
+---
+
+## 🧪 API Testing
+
+Tested using Swagger UI.
+Logs are added to verify flow:
+Controller → Service → Repository → Database
+
+---
+
+## 📥 Sample POST JSON
+
+```json
+{
+  "name": "Kaviya M",
+  "mail": "kaviya@example.com",
+  "phone": "9876543210",
+  "designation": "Software Engineer",
+  "department": "IT",
+  "status": "Active",
+  "doj": "2024-07-15T10:30:00"
+}
+```
+
+---
+
+## 🚀 Key Concepts
+
+* Service Layer Pattern
+* Repository Pattern
+* Dependency Injection
+* Entity Framework Core
+
+---
+
+## ✅ Outcome
+
+Implemented a clean and scalable backend architecture suitable for real-world applications and product-based company standards.
