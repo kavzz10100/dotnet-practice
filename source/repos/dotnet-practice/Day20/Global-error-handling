@@ -1,0 +1,167 @@
+# 🚀 Employee Management API – Global Exception & Validation Handling
+
+## 📌 Overview
+
+This project is a **RESTful Employee Management API** built using **ASP.NET Core Web API**.
+It demonstrates a clean architecture with **Controller → Service → Repository pattern** and implements **global exception handling and validation** for consistent API responses.
+
+---
+
+## 🏗️ Architecture
+
+* **Controller Layer** → Handles HTTP requests/responses
+* **Service Layer** → Business logic
+* **Repository Layer** → Database operations (Entity Framework Core)
+* **Middleware** → Global exception handling
+* **Filters** → Global validation handling
+
+---
+
+## ⚙️ Key Features
+
+### ✅ Global Exception Handling
+
+* Implemented using custom `ExceptionMiddleware`
+* Catches all unhandled exceptions
+* Returns consistent JSON response
+* Maps exceptions to proper HTTP status codes
+
+### ✅ Global Validation Handling
+
+* Implemented using `ValidationFilter`
+* Handles all `ModelState` errors globally
+* Prevents default ASP.NET validation response
+* Returns structured error messages
+
+### ✅ Consistent API Response Format
+
+```json
+{
+  "success": false,
+  "message": "Validation failed",
+  "errors": [
+    {
+      "field": "Mail",
+      "message": "The Mail field is required."
+    }
+  ]
+}
+```
+
+---
+
+## 🔥 HTTP Status Codes Used
+
+| Status Code               | Meaning                      |
+| ------------------------- | ---------------------------- |
+| 200 OK                    | Successful GET/PUT/DELETE    |
+| 201 Created               | Resource created             |
+| 400 Bad Request           | Validation errors            |
+| 404 Not Found             | Resource not found           |
+| 409 Conflict              | Duplicate data (e.g., email) |
+| 500 Internal Server Error | Unhandled exceptions         |
+
+---
+
+## 🧩 Middleware & Filters
+
+### ExceptionMiddleware
+
+* Handles:
+
+  * `KeyNotFoundException` → 404
+  * `ArgumentException` → 400
+  * `DbUpdateException` → 409
+  * `JsonException` → 400
+  * Unknown errors → 500
+
+### ValidationFilter
+
+* Intercepts invalid requests before controller execution
+* Returns field-level error details
+
+---
+
+## ⚠️ Important Configuration
+
+```csharp
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<ValidationFilter>();
+});
+
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.SuppressModelStateInvalidFilter = true;
+});
+```
+
+---
+
+## 📡 API Endpoints
+
+| Method | Endpoint            | Description        |
+| ------ | ------------------- | ------------------ |
+| GET    | /api/employees      | Get all employees  |
+| GET    | /api/employees/{id} | Get employee by ID |
+| POST   | /api/employees      | Create employee    |
+| PUT    | /api/employees/{id} | Update employee    |
+| DELETE | /api/employees/{id} | Delete employee    |
+
+---
+
+## 🧪 Sample Request (POST)
+
+```json
+{
+  "name": "John Doe",
+  "mail": "john.doe@gmail.com",
+  "phone": "9876543210",
+  "designation": "Developer",
+  "department": "IT",
+  "status": "Active",
+  "doj": "2024-01-15"
+}
+```
+
+---
+
+## ❌ Sample Validation Error
+
+```json
+{
+  "success": false,
+  "message": "Validation failed",
+  "errors": [
+    {
+      "field": "Mail",
+      "message": "The Mail field is required."
+    },
+    {
+      "field": "Phone",
+      "message": "The Phone field is required."
+    }
+  ]
+}
+```
+
+---
+
+## 🛠️ Technologies Used
+
+* ASP.NET Core Web API
+* Entity Framework Core
+* SQL Server
+* Swagger (API Testing)
+
+---
+
+## 🎯 Conclusion
+
+This project demonstrates:
+
+* Clean layered architecture
+* Centralized error handling
+* Global validation mechanism
+* Standardized API responses
+
