@@ -80,6 +80,66 @@ Repository (DB Operations)
       ↓
 SQL Server
 
+🔁 Duplicate Entry Validation
+
+📌 Overview
+Implemented duplicate checking to prevent multiple employees from having the same email or phone number, ensuring data integrity and consistency.
+
+🚫 Problem
+
+Initially, the API allowed:
+
+Same email to be inserted multiple times
+Same phone number to be reused
+
+This could lead to data redundancy and inconsistency.
+
+✅ Solution Implemented
+🔥 Service-Level Validation
+
+Before inserting a new employee, the system checks if an employee already exists with the same email or phone number.
+
+var existing = _repo.GetAll()
+    .FirstOrDefault(e => e.Mail == dto.Email || e.Phone == dto.Phone);
+
+if (existing != null)
+{
+    throw new ArgumentException("Employee with same email or phone already exists");
+}
+🛡️ Optional Database-Level Protection
+
+To ensure strict uniqueness, database constraints can also be applied:
+
+[Index(nameof(Mail), IsUnique = true)]
+[Index(nameof(Phone), IsUnique = true)]
+🧪 Test Cases
+❌ Duplicate Email / Phone
+{
+  "name": "Test User",
+  "email": "kaviya123@gmail.com",
+  "phone": "9876543210",
+  "designation": "Developer",
+  "department": "IT",
+  "status": "Active",
+  "doj": "2024-03-20"
+}
+
+👉 Sending the same request again will result in:
+
+{
+  "success": false,
+  "message": "Employee with same email or phone already exists"
+}
+
+🎯 Benefits
+✔ Prevents duplicate records
+✔ Ensures data consistency
+✔ Improves API reliability
+✔ Mimics real-world enterprise systems
+⚡ Design Approach
+Service Layer → Handles user-friendly validation
+Database Layer → Ensures strict enforcement (optional but recommended)
+
 📊 Demo Highlights
 ✔ Live testing using Postman
 ✔ Validation errors displayed clearly
