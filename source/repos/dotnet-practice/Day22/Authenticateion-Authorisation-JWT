@@ -1,0 +1,151 @@
+# 🔐 JWT Authentication & Authorization – ASP.NET Core Web API
+
+## 📌 Overview
+
+This project demonstrates the implementation of **JWT (JSON Web Token) based Authentication and Authorization** in an ASP.NET Core Web API.
+
+It includes:
+
+* User login and token generation
+* Secured APIs using `[Authorize]`
+* Token validation using Bearer Authentication
+* Testing using Postman
+
+---
+
+## 🚀 Features
+
+* ✅ User Authentication (Username & Password)
+* 🔑 JWT Token Generation
+* 🔐 Protected APIs using Authorization
+* ❌ Unauthorized access handling (401)
+* 🧪 API testing with Postman
+
+---
+
+## 🛠️ Tech Stack
+
+* ASP.NET Core Web API
+* C#
+* JWT Bearer Authentication
+* Postman (API Testing)
+
+---
+
+## 🔄 Authentication Flow
+
+1. User sends login credentials
+2. Server validates credentials
+3. JWT Token is generated
+4. Token is sent to the client
+5. Client sends token in Authorization header
+6. Server validates token and allows access
+
+---
+
+## 🔑 Login API
+
+### Endpoint
+
+```
+POST /api/auth/login
+```
+
+### Request Body
+
+```json
+{
+  "username": "admin",
+  "password": "1234"
+}
+```
+
+### Response
+
+```json
+{
+  "success": true,
+  "token": "your_jwt_token"
+}
+```
+
+---
+
+## 🔐 Protected API
+
+### Example Endpoint
+
+```
+GET /api/employees
+```
+
+### Authorization Header
+
+```
+Authorization: Bearer your_jwt_token
+```
+
+---
+
+## ❌ Error Handling
+
+| Status Code | Meaning                            |
+| ----------- | ---------------------------------- |
+| 401         | Unauthorized (No or Invalid Token) |
+| 404         | Not Found (Wrong URL)              |
+| 400         | Bad Request (Validation Error)     |
+
+---
+
+## 🧪 Testing in Postman
+
+### Step 1: Login
+
+* Send POST request with username & password
+* Copy the token from response
+
+### Step 2: Access Protected API
+
+* Go to Authorization tab
+* Select **Bearer Token**
+* Paste the token
+* Send request
+
+---
+
+## 📂 Project Structure
+
+```
+Controllers/
+    AuthController.cs
+    EmployeeController.cs
+
+Services/
+    AuthService.cs
+    EmployeeService.cs
+
+DTOs/
+    EmployeeDto.cs
+
+Models/
+    Employee.cs
+```
+
+---
+
+## 🎯 Key Concepts Learned
+
+* JWT Authentication
+* Authorization using `[Authorize]`
+* Bearer Token usage
+* API security basics
+* Middleware handling
+
+--
+## 🏁 Conclusion
+
+This project successfully demonstrates how to secure APIs using JWT in ASP.NET Core. It ensures that only authenticated users can access protected resources.
+
+---
+
+
