@@ -1,0 +1,142 @@
+# 📘 Day 23 – LINQ Advanced Queries in ASP.NET Core Web API
+
+## 🚀 Overview
+
+On Day 23, I implemented **Advanced LINQ Queries** in my ASP.NET Core Web API project to perform efficient data filtering, searching, grouping, and retrieval operations on employee data.
+
+These queries enhance the API by enabling dynamic and optimized data handling without modifying the database structure.
+
+---
+
+## 🧠 Concepts Covered
+
+* LINQ (`Where`, `Select`, `GroupBy`, `OrderBy`)
+* Filtering based on conditions
+* Case-insensitive search
+* Grouping and aggregation
+* Clean Service Layer implementation
+
+---
+
+## 🔧 Features Implemented
+
+### 1. 🔍 Search Employees by Name
+
+* Allows searching employees using partial name match
+* Case-insensitive filtering
+
+**API:**
+
+```
+GET /api/employees/search?name=ka
+```
+
+---
+
+### 2. ✅ Get Active Employees
+
+* Retrieves employees with status = Active
+
+**API:**
+
+```
+GET /api/employees/active
+```
+
+---
+
+### 3. 🏢 Get Employees by Department
+
+* Filters employees based on department
+
+**API:**
+
+```
+GET /api/employees/department?dept=IT
+```
+
+---
+
+### 4. 📊 Group Employees by Department
+
+* Groups employees and returns count per department
+
+**API:**
+
+```
+GET /api/employees/group-department
+```
+
+**Sample Output:**
+
+```json
+[
+  {
+    "department": "IT",
+    "count": 3
+  },
+  {
+    "department": "HR",
+    "count": 2
+  }
+]
+```
+
+---
+
+### 5. 🕒 Get Recent Employees
+
+* Retrieves latest 5 employees based on Date of Joining
+
+**API:**
+
+```
+GET /api/employees/recent
+```
+
+---
+
+## 🏗️ Architecture Used
+
+* Controller Layer → Handles HTTP requests
+* Service Layer → Contains business logic and LINQ queries
+* Repository Layer → Handles data access
+
+---
+
+## 🔐 Security
+
+* All endpoints are secured using **JWT Authentication**
+* Access requires Bearer Token in Authorization header
+
+---
+
+## 🧪 Testing
+
+* Tested all APIs using **Postman**
+* Verified:
+
+  * Correct filtering
+  * Case-insensitive search
+  * Proper grouping results
+  * Token-based authentication
+
+---
+
+## 🏁 Outcome
+
+* Successfully implemented advanced LINQ queries
+* Improved API performance and flexibility
+* Built a scalable and clean backend structure
+
+---
+
+## 💬 Key Learning
+
+> LINQ enables efficient data querying and manipulation directly within the application, reducing complexity and improving readability.
+
+---
+
+## 📌 Conclusion
+
+Day 23 focused on making the API smarter by adding dynamic query capabilities. These features are essential for building real-world applications and are commonly used in industry-level backend development.
