@@ -1,0 +1,62 @@
+[HttpGet]
+public async Task<IActionResult> GetAll()
+{
+    return Ok(await _service.GetAllEmployees());
+}
+
+[HttpGet("{id}")]
+public async Task<IActionResult> GetById(int id)
+{
+    return Ok(await _service.GetEmployeeById(id));
+}
+
+[HttpPost]
+public async Task<IActionResult> CreateEmployee(EmployeeDto dto)
+{
+    var result = await _service.CreateEmployee(dto);
+    return Ok(result);
+}
+
+[HttpPut("{id}")]
+public async Task<IActionResult> Update(int id, Employee emp)
+{
+    return Ok(await _service.UpdateEmployee(id, emp));
+}
+
+[HttpDelete("{id}")]
+public async Task<IActionResult> Delete(int id)
+{
+    return Ok(await _service.DeleteEmployee(id));
+}
+
+// 🔥 LINQ APIs
+
+[HttpGet("active")]
+public async Task<IActionResult> GetActive()
+{
+    return Ok(await _service.GetActiveEmployees());
+}
+
+[HttpGet("recent")]
+public async Task<IActionResult> GetRecent()
+{
+    return Ok(await _service.GetRecentEmployees());
+}
+
+[HttpGet("group-department")]
+public async Task<IActionResult> GroupByDepartment()
+{
+    return Ok(await _service.GetDepartmentWiseCount());
+}
+
+[HttpGet("search")]
+public async Task<IActionResult> Search(string name)
+{
+    return Ok(await _service.SearchEmployees(name));
+}
+
+[HttpGet("department")]
+public async Task<IActionResult> GetByDepartment(string dept)
+{
+    return Ok(await _service.GetByDepartment(dept));
+}
