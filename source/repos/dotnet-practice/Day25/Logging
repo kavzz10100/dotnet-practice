@@ -1,0 +1,142 @@
+# 📅 Day 25 – Logging Implementation in .NET
+
+## 📌 Overview
+
+On Day 25, I implemented **logging in ASP.NET Core Web API** to track application behavior, debug issues, and monitor API activity.
+
+Logging was added across multiple layers including:
+
+* Controller
+* Service
+* Middleware (Exception Handling)
+
+---
+
+## 🎯 Objectives
+
+* Understand the importance of logging
+* Implement logging using `ILogger`
+* Track API requests and responses
+* Capture and log exceptions centrally
+* Improve debugging and monitoring
+
+---
+
+## 🛠️ Technologies Used
+
+* ASP.NET Core Web API
+* Built-in `ILogger`
+* Dependency Injection
+* Exception Middleware
+* Entity Framework Core
+
+---
+
+## 🔧 Implementation Details
+
+### 🔹 1. Controller Logging
+
+Logging is added to track API hits.
+
+Example:
+
+* Log when API is called
+* Log request details
+
+---
+
+### 🔹 2. Service Layer Logging
+
+Logging is used to monitor business logic execution.
+
+Example:
+
+* Fetching employees
+* Creating, updating, deleting records
+* Handling validation scenarios
+
+---
+
+### 🔹 3. Exception Middleware Logging
+
+Centralized error handling with logging.
+
+Features:
+
+* Captures all unhandled exceptions
+* Returns structured error response
+* Logs different types of exceptions:
+
+  * Not Found (404)
+  * Bad Request (400)
+  * Unauthorized (401)
+  * Forbidden (403)
+  * Server Error (500)
+
+---
+
+### 🔹 4. Database Logging
+
+Entity Framework Core logs database queries and execution details.
+
+---
+
+## 📊 Logging Levels Used
+
+* Information → API flow tracking
+* Warning → Validation issues / missing data
+* Error → Exceptions
+* Critical → Unexpected failures
+
+⚠️ Warning Log
+warn: MyFirstWebApp.Middleware.ExceptionMiddleware[0]
+Resource not found: Employee with ID 1 not found
+
+✔ This means:
+
+Your ExceptionMiddleware is triggered ✅
+KeyNotFoundException is caught ✅
+Logged as Warning (correct level) ✅
+---
+
+## 🧪 Testing
+
+Logging was tested using Swagger by performing:
+
+* GET all employees
+* GET employee by ID
+* CREATE employee
+* UPDATE employee
+* DELETE employee
+
+---
+
+## ✅ Sample Log Output
+
+* API Hit: GetAll Employees
+* Fetching all employees
+* Employee not found with ID
+* Employee deleted successfully
+
+---
+
+## 🚀 Key Learnings
+
+* Logging helps in debugging and monitoring applications
+* Centralized exception handling improves code quality
+* `ILogger` provides structured and scalable logging
+* Logging should be implemented at multiple layers
+
+---
+
+## 📌 Conclusion
+
+Successfully implemented logging across the application using `ILogger`, improving traceability, debugging, and overall application reliability.
+
+---
+
+## 🔥 Future Enhancements
+
+* Integrate advanced logging using Serilog
+* Store logs in files or external systems
+* Add log monitoring dashboards
