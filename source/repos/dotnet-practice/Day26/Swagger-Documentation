@@ -1,0 +1,174 @@
+## 📅 Day 26 - Swagger API Documentation
+
+### 🚀 Overview
+
+On Day 26, I implemented API documentation and testing using Swagger in my ASP.NET Core Web API project. This allows easy visualization, testing, and understanding of all available endpoints.
+
+---
+
+### 🔧 Features Implemented
+
+* Integrated Swagger UI for API documentation
+* Documented all CRUD endpoints (GET, POST, PUT, DELETE)
+* Tested APIs directly using Swagger UI
+* Configured JWT Authentication support in Swagger
+* Enabled secure API testing using Bearer Token
+
+---
+
+### 🔐 Authentication Flow
+
+* Implemented login endpoint to generate JWT token
+* Used token-based authentication to secure APIs
+* Added "Authorize" button in Swagger UI
+* Passed token in format:
+
+  ```
+  Bearer <your_token>
+  ```
+
+---
+
+### 🧪 API Testing
+
+All endpoints were successfully tested using Swagger:
+
+* ✅ Login (`/api/Auth/login`)
+* ✅ Get All Employees (`GET /api/Employee`)
+* ✅ Get Employee by ID (`GET /api/Employee/{id}`)
+* ✅ Create Employee (`POST /api/Employee`)
+* ✅ Update Employee (`PUT /api/Employee/{id}`)
+* ✅ Delete Employee (`DELETE /api/Employee/{id}`)
+
+---
+
+### 🗄️ Database Integration
+
+* Connected to SQL Server database
+* Verified all CRUD operations reflect in database
+* Used Entity Framework Core for ORM operations
+
+---
+
+### 📊 Logging & Middleware
+
+* Implemented custom logging middleware to track requests
+* Logs include:
+
+  * Request start and end
+  * API hits
+  * Service layer operations
+  * Database queries
+
+---
+
+### 🧠 Key Learnings
+
+* Importance of API documentation
+* How Swagger simplifies API testing
+* Integration of JWT Authentication in Swagger
+* Understanding request pipeline and middleware flow
+* Real-time debugging using logs
+
+---
+
+### 💯 Outcome
+
+Successfully built and tested a secure, documented REST API with full CRUD operations and authentication, making the project more professional and industry-ready.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+console output:
+
+[POST] Request Started → /api/Auth/login                  //this ensures API auth login 
+[POST] Request Finished → /api/Auth/login
+
+[GET] Request Started → /api/Employee
+info: MyFirstWebApp.Controllers.EmployeeController[0]
+      API Hit: GetAll Employees
+info: MyFirstWebApp.Services.EmployeeService[0]
+      Fetching all employees
+👉 Repository: Getting data from DB
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (97ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT [e].[EmpId], [e].[DOJ], [e].[Department], [e].[Designation], [e].[Mail], [e].[Name], [e].[Phone], [e].[Status]
+      FROM [Employee] AS [e]
+[GET] Request Finished → /api/Employee
+
+[GET] Request Started → /api/Employee/7
+info: MyFirstWebApp.Controllers.EmployeeController[0]
+      API Hit: Get Employee by ID 7
+info: MyFirstWebApp.Services.EmployeeService[0]
+      Fetching employee with ID 7
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (156ms) [Parameters=[@p='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [e].[EmpId], [e].[DOJ], [e].[Department], [e].[Designation], [e].[Mail], [e].[Name], [e].[Phone], [e].[Status]
+      FROM [Employee] AS [e]
+      WHERE [e].[EmpId] = @p
+[GET] Request Finished → /api/Employee/7
+
+[PUT] Request Started → /api/Employee/7
+info: MyFirstWebApp.Controllers.EmployeeController[0]
+      API Hit: Update Employee ID 7
+info: MyFirstWebApp.Services.EmployeeService[0]
+      Updating employee ID 7
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (14ms) [Parameters=[@p='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [e].[EmpId], [e].[DOJ], [e].[Department], [e].[Designation], [e].[Mail], [e].[Name], [e].[Phone], [e].[Status]
+      FROM [Employee] AS [e]
+      WHERE [e].[EmpId] = @p
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (21ms) [Parameters=[@p7='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 450), @p4='?' (Size = 4000), @p5='?' (Size = 450), @p6='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+      SET IMPLICIT_TRANSACTIONS OFF;
+      SET NOCOUNT ON;
+       UPDATE [Employee] SET [DOJ] = @p0, [Department] = @p1, [Designation] = @p2, [Mail] = @p3, [Name] = @p4, [Phone] = @p5, [Status] = @p6
+      OUTPUT 1
+      WHERE [EmpId] = @p7;
+info: MyFirstWebApp.Services.EmployeeService[0]
+      Employee updated successfully
+[PUT] Request Finished → /api/Employee/7
+
+[DELETE] Request Started → /api/Employee/7
+info: MyFirstWebApp.Controllers.EmployeeController[0]
+      API Hit: Delete Employee ID 7
+info: MyFirstWebApp.Services.EmployeeService[0]
+      Deleting employee ID 7
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[@p='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [e].[EmpId], [e].[DOJ], [e].[Department], [e].[Designation], [e].[Mail], [e].[Name], [e].[Phone], [e].[Status]
+      FROM [Employee] AS [e]
+      WHERE [e].[EmpId] = @p
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (6ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SET IMPLICIT_TRANSACTIONS OFF;
+      SET NOCOUNT ON;
+      DELETE FROM [Employee]
+      OUTPUT 1
+      WHERE [EmpId] = @p0;
+info: MyFirstWebApp.Services.EmployeeService[0]
+      Employee deleted successfully
+[DELETE] Request Finished → /api/Employee/7
+
+[POST] Request Started → /api/Employee
+[POST] Request Finished → /api/Employee
+
+[POST] Request Started → /api/Employee
+info: MyFirstWebApp.Controllers.EmployeeController[0]
+      API Hit: Create Employee
+info: MyFirstWebApp.Services.EmployeeService[0]
+      Creating employee with Email doe@gmail.com
+👉 Repository: Getting data from DB
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT [e].[EmpId], [e].[DOJ], [e].[Department], [e].[Designation], [e].[Mail], [e].[Name], [e].[Phone], [e].[Status]
+      FROM [Employee] AS [e]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (25ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 450), @p4='?' (Size = 4000), @p5='?' (Size = 450), @p6='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+      SET IMPLICIT_TRANSACTIONS OFF;
+      SET NOCOUNT ON;
+      INSERT INTO [Employee] ([DOJ], [Department], [Designation], [Mail], [Name], [Phone], [Status])
+      OUTPUT INSERTED.[EmpId]
+      VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+info: MyFirstWebApp.Services.EmployeeService[0]
+      Employee created successfully
+[POST] Request Finished → /api/Employee   with this what u have understand .. this us the reflectio of swagger i did  
