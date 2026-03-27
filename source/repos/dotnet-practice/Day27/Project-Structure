@@ -1,0 +1,222 @@
+# 🧑‍💼 Employee Management System (Angular + ASP.NET Core)
+
+## 📌 Project Overview
+
+The **Employee Management System** is a full-stack web application designed to manage employee records efficiently. It supports complete CRUD operations (Create, Read, Update, Delete), search functionality, and follows a clean layered architecture using the **Repository Pattern**.
+
+This project is built as part of an interview assignment to demonstrate full-stack development skills, clean architecture, and production-ready coding practices.
+
+---
+
+## 🚀 Tech Stack
+
+### 🔹 Backend
+
+* ASP.NET Core Web API
+* Entity Framework Core
+* SQL Server
+* LINQ
+* FluentValidation (or custom validation)
+* Repository Pattern
+
+### 🔹 Frontend
+
+* Angular (Latest Version)
+* TypeScript
+* Angular Reactive Forms
+* Angular Router
+* HTTP Client Module
+* Bootstrap / Tailwind CSS (for UI)
+
+---
+
+## ✨ Features
+
+### ✅ Core Features
+
+* Add new employee
+* View all employees (list view)
+* View employee details
+* Edit employee details
+* Delete employee
+* Search employees by name (partial & case-insensitive)
+
+### ✅ Validation
+
+* Frontend validation (Angular Reactive Forms)
+* Backend validation (DTO + Validators)
+* Unique email constraint
+* Proper error handling with HTTP status codes
+
+### ✅ UI/UX
+
+* Responsive design (mobile + desktop)
+* Clean and modern interface
+* Loading indicators (spinner)
+* Toast notifications (success/error)
+
+---
+
+## 🏗️ Project Architecture
+
+### Backend Architecture
+
+```
+Controller → Service → Repository → Database
+```
+
+* **Controller Layer** → Handles HTTP requests
+* **Service Layer** → Business logic
+* **Repository Layer** → Data access
+* **Database Layer** → SQL Server
+
+---
+
+## 📂 Project Structure
+
+```
+employee-management-angular/
+│
+├── backend/
+│   ├── EmployeeManagement.API/
+│   │   ├── Controllers/
+│   │   ├── Services/
+│   │   ├── Repositories/
+│   │   ├── Models/
+│   │   ├── DTOs/
+│   │   ├── Validators/
+│   │   ├── Middleware/
+│   │   ├── Data/
+│   │   ├── Program.cs
+│   │   └── appsettings.json
+│
+├── frontend/
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── components/
+│   │   │   ├── pages/
+│   │   │   ├── services/
+│   │   │   ├── app-routing.module.ts
+│   │   │   └── app.module.ts
+│   │   ├── environments/
+│   │   └── styles.css
+│
+├── README.md
+└── .gitignore
+```
+
+---
+
+## 🔗 API Endpoints
+
+| Method | Endpoint            | Description                     |
+| ------ | ------------------- | ------------------------------- |
+| GET    | /api/employees      | Get all employees (with search) |
+| GET    | /api/employees/{id} | Get employee by ID              |
+| POST   | /api/employees      | Create new employee             |
+| PUT    | /api/employees/{id} | Update employee                 |
+| DELETE | /api/employees/{id} | Delete employee                 |
+
+---
+
+## 🧾 Employee Model
+
+| Field         | Type   | Description       |
+| ------------- | ------ | ----------------- |
+| EmployeeId    | string | Unique ID         |
+| FullName      | string | Required          |
+| Email         | string | Required, unique  |
+| PhoneNumber   | string | Required          |
+| Designation   | string | Required          |
+| Department    | string | Required          |
+| DateOfJoining | date   | Required          |
+| Status        | string | Active / Inactive |
+
+---
+
+## ⚙️ Setup Instructions
+
+### 🔹 Backend Setup
+
+```
+cd backend/EmployeeManagement.API
+dotnet restore
+dotnet ef database update
+dotnet run
+```
+
+Runs on:
+
+```
+http://localhost:5000
+```
+
+---
+
+### 🔹 Frontend Setup
+
+```
+cd frontend
+npm install
+ng serve
+```
+
+Runs on:
+
+```
+http://localhost:4200
+```
+
+---
+
+## 🔑 Environment Configuration
+
+### Backend (appsettings.json)
+
+```
+"ConnectionStrings": {
+  "DefaultConnection": "Server=localhost;Database=EmployeeDB;Trusted_Connection=true;"
+}
+```
+
+### Frontend (environment.ts)
+
+```
+export const environment = {
+  apiUrl: 'http://localhost:5000/api'
+};
+```
+
+---
+
+## 🧪 Testing
+
+* Backend tested using Postman
+* Frontend tested via browser interactions
+* All CRUD operations verified
+* Search functionality tested (partial + case-insensitive)
+
+---
+
+## 📊 Evaluation Checklist
+
+✔ CRUD operations working
+✔ Search functionality implemented
+✔ Clean architecture followed
+✔ Repository pattern used
+✔ Frontend + backend validation
+✔ Responsive UI
+✔ Proper error handling
+✔ Clean and readable code
+
+---
+
+## 🧠 Key Design Decisions
+
+* Used **Angular** for scalable frontend architecture
+* Implemented **Repository Pattern** for maintainability
+* Used **DTOs** to separate API contracts from database models
+* Applied **layered architecture** for clean separation of concerns
+
+
+
