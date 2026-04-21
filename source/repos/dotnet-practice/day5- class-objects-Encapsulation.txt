@@ -146,19 +146,12 @@ Current Balance: 3000
 Improvements Achieved:
 
 Implemented encapsulation by converting public fields into private fields with proper getter setter validation methods.
-
 Replaced traditional getter/setter methods with C# properties for cleaner and modern code design.
-
 Applied input validation (e.g., age and transaction amounts) to ensure data integrity.
-
 Improved method naming conventions using PascalCase (e.g., Display, Deposit, Withdraw).
-
 Ensured data security by restricting direct access to sensitive fields like balance.
-
 Structured code into separate logical classes (Student, Person, BankAccount) for better readability.
-
 Enhanced console output formatting with clear section-wise examples.
-
 Fixed logical issues (e.g., incorrect message in Withdraw method)
 
 
