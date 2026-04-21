@@ -1,105 +1,165 @@
+
 using System;
-using System.ComponentModel;
 
 class Student
 {
+    private string name;
+    private int age;
 
-    public string name;
-    public int age;
-
-    public void display()
+    public string Name
     {
-        Console.WriteLine("Student Name:" + name);
-        Console.WriteLine("Student Age:" + age);
-    }
-
-    public int Add(int a, int b)
-    {
-        return a + b;
-    }
-
-}
-
-    class Person
-    {
-        private string place;   //--> encapsulation
-
-        public void setName(string n)
+        get { return name; }
+        set
         {
-            place = n;
+            if (!string.IsNullOrWhiteSpace(value))
+                name = value;
+            else
+                Console.WriteLine("Invalid name!");
         }
-
-        public string getName()
-        {
-            return place;
     }
 
+    public int Age
+    {
+        get { return age; }
+        set
+        {
+            if (value > 0)
+                age = value;
+            else
+                Console.WriteLine("Invalid age!");
+        }
+    }
 
+    public void Display()
+    {
+        Console.WriteLine("Student Name: " + Name);
+        Console.WriteLine("Student Age: " + Age);
+    }
 }
 
+class Person
+{
+    private string place;
 
+    public string Place
+    {
+        get { return place; }
+        set
+        {
+            if (!string.IsNullOrWhiteSpace(value))
+                place = value;
+            else
+                Console.WriteLine("Invalid place!");
+        }
+    }
 
-class BankAccount {
+    public void Display()
+    {
+        Console.WriteLine("Place: " + Place);
+    }
+}
 
+class BankAccount
+{
     private double balance;
+
+    public double Balance
+    {
+        get { return balance; }
+        private set { balance = value; }
+    }
 
     public void Deposit(double amount)
     {
-        balance = balance + amount;
-        Console.WriteLine("Deposited Amount: " + amount);
+        if (amount > 0)
+        {
+            Balance += amount;
+            Console.WriteLine("Deposited Amount: " + amount);
+        }
+        else
+        {
+            Console.WriteLine("Invalid deposit amount!");
+        }
     }
 
     public void Withdraw(double amount)
     {
-        if (amount <= balance)
+        if (amount > 0 && amount <= Balance)
         {
-            balance = balance - amount;
-        Console.WriteLine("Deposited Amount: " + amount);
+            Balance -= amount;
+            Console.WriteLine("Withdrawn Amount: " + amount);
         }
         else
         {
-            Console.WriteLine("Insufficient Balance!!");
+            Console.WriteLine("Insufficient Balance or Invalid Amount!");
         }
-
     }
 
     public void Show()
     {
-        Console.WriteLine("Current Balance: " + balance);
+        Console.WriteLine("Current Balance: " + Balance);
     }
-
-
 }
-
-
-
-
 
 class Program
 {
     static void Main()
     {
-        Student s1 = new Student();  //--> object creation 
+        Console.WriteLine("----------- Student Example -----------");
+        Student s1 = new Student();
+        s1.Name = "kaviya";
+        s1.Age = 23;
+        s1.Display();
 
-        Console.WriteLine("---------------------------Object creation with Funcion Calling ------------------------------------- ");
-        s1.name="kaviya";
-        s1.age=23;
-        s1.display();
+        Console.WriteLine("\n----------- Person Example -----------");
+        Person p1 = new Person();
+        p1.Place = "Chennai";
+        p1.Display();
 
-        int res = s1.Add(20, 20);
-        Console.WriteLine("Add: " + res);
-
-        Console.WriteLine("--------------------------Encapsulation example with Get /set method--------------------------------");
-        Person p = new Person();
-        p.setName("chennai");
-        Console.WriteLine("place: "+ (p.getName()));
-
-        Console.WriteLine("-----------------------Encapsulation bank account - Deposit/Withdraw------------------------------ ");
+        Console.WriteLine("\n----------- Bank Account Example -----------");
         BankAccount bank = new BankAccount();
         bank.Deposit(5000);
         bank.Withdraw(2000);
         bank.Show();
-
-
     }
 }
+
+
+--------------------------------------------------------------------------
+
+expected output:
+
+----------- Student Example -----------
+Student Name: kaviya
+Student Age: 23
+
+----------- Person Example -----------
+Place: Chennai
+
+----------- Bank Account Example -----------
+Deposited Amount: 5000
+Withdrawn Amount: 2000
+Current Balance: 3000
+
+
+--------------------------------------------------------------------------------
+Improvements Achieved:
+
+Implemented encapsulation by converting public fields into private fields with proper getter setter validation methods.
+
+Replaced traditional getter/setter methods with C# properties for cleaner and modern code design.
+
+Applied input validation (e.g., age and transaction amounts) to ensure data integrity.
+
+Improved method naming conventions using PascalCase (e.g., Display, Deposit, Withdraw).
+
+Ensured data security by restricting direct access to sensitive fields like balance.
+
+Structured code into separate logical classes (Student, Person, BankAccount) for better readability.
+
+Enhanced console output formatting with clear section-wise examples.
+
+Fixed logical issues (e.g., incorrect message in Withdraw method)
+
+
+
